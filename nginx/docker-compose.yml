@@ -10,9 +10,9 @@ services:
       -  web
     volumes:
       - ./conf.d:/etc/nginx/conf.d:ro
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-      - /home/jakob/homelab/static-site/html/:/usr/share/nginx/static/:ro
+      - ../static-site/html/:/usr/share/nginx/static/:ro
+      - /etc/letsencrypt/ssl/fullchain.pem:/etc/nginx/ssl/fullchain.pem
+      - /etc/letsencrypt/ssl/privkey.pem:/etc/nginx/ssl/privkey.pem
   certbot:
     image: certbot/certbot
     container_name: certbot
