@@ -11,19 +11,17 @@ services:
     volumes:
       - ./conf.d:/etc/nginx/conf.d:ro
       - ../static-site/html/:/usr/share/nginx/static/:ro
-      - /etc/letsencrypt/ssl/fullchain.pem:/etc/nginx/ssl/fullchain.pem
-      - /etc/letsencrypt/ssl/privkey.pem:/etc/nginx/ssl/privkey.pem
+      - ./data/certbot/www:/var/www/certbot       # ACME challenge files
+      - ./data/certbot/conf:/etc/letsencrypt      # Certbot’s cert store
   certbot:
     image: certbot/certbot
     container_name: certbot
     restart: unless-stopped
-    network_mode: "host"
     volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
+      - ./data/certbot/conf:/etc/letsencrypt
     depends_on:
       - reverse-proxy
-
 networks:
   web:
     external: true
