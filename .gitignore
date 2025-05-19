@@ -1,0 +1,15 @@
+nextcloud/nextclouddb/
+nextcloud/redis/
+nextcloud/custom_apps/
+nextcloud/html/
+docker-compose.override.yml
+nginx/data/certbot/
+nginx/certs/
+pihole/pihole_data/
+pihole/dnsmasq_data/
+portainer/portainer_data/
+nextcloud/data/
+.log
+nginx/.log
+*.swp
+*~

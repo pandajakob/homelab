@@ -1,17 +1,29 @@
 services:
   reverse-proxy:
-    image: nginx:stable-alpine
+    image: nginx:1.15-alpine
     container_name: nginx-proxy
     restart: unless-stopped
     ports:
-      - '80:80'
-      - '443:443'
+      - "80:80"
+      - "443:443"
+    networks:
+      -  web
     volumes:
       - ./conf.d:/etc/nginx/conf.d:ro
-      - ./certs:/etc/nginx/certs:ro
-    networks:
-      - web
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+      - /home/jakob/homelab/static-site/html/:/usr/share/nginx/static/:ro
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    depends_on:
+      - reverse-proxy
 
 networks:
   web:
-    driver: bridge
+    external: true

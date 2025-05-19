@@ -1,0 +1,28 @@
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    restart: unless-stopped
+    # Expose DNS on the host so the LAN can use it:
+    ports:
+      - "53:53/tcp"      # DNS over TCP
+      - "53:53/udp"
+      - "8080:80"
+    networks:
+      - web
+    environment:
+      TZ: "Europe/Copenhagen"
+      WEBPASSWORD: "pejdof-Gynnav-9hidmo"
+      # Upstream DNS resolvers:
+      DNS1: 1.1.1.1
+      DNS2: 9.9.9.9
+    volumes:
+      - pihole_data:/etc/pihole
+      - dnsmasq_data:/etc/dnsmasq.d
+
+networks:
+  web:
+    external: true
+volumes:
+  pihole_data:
+  dnsmasq_data:
