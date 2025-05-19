@@ -12,14 +12,12 @@ services:
       - web
     environment:
       TZ: "Europe/Copenhagen"
-      WEBPASSWORD: "pejdof-Gynnav-9hidmo"
       # Upstream DNS resolvers:
       DNS1: 1.1.1.1
       DNS2: 9.9.9.9
     volumes:
       - pihole_data:/etc/pihole
       - dnsmasq_data:/etc/dnsmasq.d
-
 networks:
   web:
     external: true
