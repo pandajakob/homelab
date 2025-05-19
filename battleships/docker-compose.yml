@@ -1,0 +1,14 @@
+services:
+  battleships:
+    image: jakobjakob/p2:1.0
+    container_name: battleships
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    networks:
+      - web
+volumes:
+  portainer_data:
+networks:
+  web:
+    external: true
