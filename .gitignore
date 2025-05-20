@@ -1,6 +1,8 @@
 nextcloud/nextclouddb/
 nextcloud/redis/
 nextcloud/custom_apps/
+nextcloud/config/*.php
+nextcloud/config
 nextcloud/html/
 docker-compose.override.yml
 nginx/data/certbot/
