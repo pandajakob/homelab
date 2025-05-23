@@ -16,3 +16,4 @@ nginx/.log
 *.swp
 *~
 *.DS_Store
+games-api/database
