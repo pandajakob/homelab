@@ -1,14 +1,14 @@
 services:
   games-api:
-    image: jakobjakob/games-api:1.0
+    image: jakobjakob/games-api:1.2
     container_name: games-api
     restart: unless-stopped
     ports:
       - "3000:3000"
     networks:
       - web
-volumes:
-  portainer_data:
+    volumes:
+      - ./database:/app/database/
 networks:
   web:
     external: true
